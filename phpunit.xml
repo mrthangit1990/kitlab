@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" colors="true">
+    <testsuites><testsuite name="KITLAB MySQL"><directory>tests/Feature</directory></testsuite></testsuites>
+    <php>
+        <env name="APP_ENV" value="testing" force="true"/>
+        <env name="DB_DATABASE" value="kitlab_test" force="true"/>
+        <env name="SESSION_DRIVER" value="array" force="true"/>
+        <env name="CACHE_STORE" value="array" force="true"/>
+        <env name="QUEUE_CONNECTION" value="sync" force="true"/>
+        <env name="KITLAB_DEMO_PASSWORD" value="Kitlab-Tests-2026!" force="true"/>
+    </php>
+</phpunit>

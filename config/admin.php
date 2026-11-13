@@ -1,0 +1,16 @@
+<?php
+return [
+ 'categories' => ['Danh mục', 'catalog', ['name'=>'required|string|max:191','slug'=>'required|alpha_dash:ascii|max:191','seo_title'=>'nullable|string|max:191','seo_description'=>'nullable|string']],
+ 'brands' => ['Thương hiệu', 'catalog', ['name'=>'required|string|max:191']],
+ 'products' => ['Sản phẩm', 'catalog', ['name'=>'required|string|max:191','slug'=>'required|alpha_dash:ascii|max:191','category_id'=>'required|exists:categories,id','brand_id'=>'required|exists:brands,id','description'=>'nullable|string','origin'=>'nullable|string|max:191','material'=>'nullable|string|max:191','dimensions'=>'nullable|string|max:191','age'=>'required|integer|min:0|max:99','pieces'=>'required|integer|min:0','video_url'=>'nullable|url:http,https','seo_title'=>'nullable|string|max:191','seo_description'=>'nullable|string','published'=>'required|boolean']],
+ 'product_variants' => ['Biến thể & SKU', 'catalog', ['product_id'=>'required|exists:products,id','name'=>'required|string|max:191','sku'=>'nullable|alpha_dash:ascii|max:70','price'=>'required|integer|min:0|max:1000000000','sale_price'=>'nullable|integer|min:0|lte:price','min_stock'=>'required|integer|min:0','weight_grams'=>'required|integer|min:0']],
+ 'product_barcodes' => ['Barcode', 'catalog', ['variant_id'=>'required|exists:product_variants,id','code'=>'nullable|regex:/^[A-Za-z0-9_.-]+$/|max:80','format'=>'required|in:code128,ean13,upca,qr']],
+ 'suppliers' => ['Nhà cung cấp', 'purchasing', ['name'=>'required|string|max:191','code'=>'required|alpha_dash:ascii|max:191','country'=>'required|string|max:191','currency'=>'required|regex:/^[A-Z]{3}$/','email'=>'nullable|email','contact'=>'nullable|string','phone'=>'nullable|string','address'=>'nullable|string','website'=>'nullable|url:http,https','payment_terms'=>'nullable|string','notes'=>'nullable|string','active'=>'required|boolean']],
+ 'warehouses' => ['Kho', 'inventory', ['code'=>'required|alpha_dash:ascii|max:191','name'=>'required|string|max:191','manager_id'=>'nullable|exists:users,id','active'=>'required|boolean']],
+ 'warehouse_locations' => ['Vị trí kho', 'inventory', ['warehouse_id'=>'required|exists:warehouses,id','code'=>'required|string|max:191']],
+ 'product_supplier' => ['Nguồn hàng theo SKU', 'purchasing', ['variant_id'=>'required|exists:product_variants,id','supplier_id'=>'required|exists:suppliers,id','purchase_price'=>'required|decimal:0,4|min:0|max:1000000000']],
+ 'expense_categories' => ['Nhóm chi phí', 'finance', ['name'=>'required|string|max:191']],
+ 'blog_categories' => ['Danh mục blog', 'content', ['name'=>'required|string|max:191']],
+ 'blog_posts' => ['Bài viết', 'content', ['title'=>'required|string|max:191','slug'=>'required|alpha_dash:ascii|max:191','blog_category_id'=>'nullable|exists:blog_categories,id','body'=>'required|string|max:30000','status'=>'required|in:draft,published','publish_at'=>'nullable|date_format:Y-m-d H:i:s','seo_title'=>'nullable|string|max:191','seo_description'=>'nullable|string']],
+ 'coupons' => ['Mã ưu đãi', 'orders', ['code'=>'required|alpha_dash:ascii|max:50','amount'=>'required|integer|min:0|max:1000000000','active'=>'required|boolean','expires_at'=>'nullable|date_format:Y-m-d H:i:s']],
+];
